@@ -1,0 +1,1 @@
+<list><node id="Root"><gate>AND</gate><dep>E1</dep><dep>E2</dep></node><node id="E1"><gate>OR</gate><dep>A1</dep><dep>A2</dep></node><node id="E2"><gate>OR</gate><dep>A2</dep><dep>A3</dep></node></list>
