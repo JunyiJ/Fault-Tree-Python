@@ -2,7 +2,7 @@
 # For example dict['Root']=['AND','E1','E2']
 # All leaf nodes' names are stored in a list called leaves, for example ['A1','A2']
 
-# To test the code
+# To mannually test the code
 # Build_FT('tree.txt')  				tree.txt is the xml file
 # MCS(n,k)
 # It will print the k cut set after running n times
@@ -10,6 +10,7 @@
 import xml.etree.ElementTree as ET
 from random import choice
 import time
+import sys
 
 dict = {}								# The dictionary to store all tree node information
 leaves = []								# The list to store the names of leaf node
@@ -102,6 +103,10 @@ def Cal_FT(node,leaf):
 				break
 	return result
 				
-# Test example		
-# Build_FT('tree.txt')
-# MCS(10000000,5)
+argv=sys.argv
+filename=argv[1]
+#print argv
+n=int(argv[2])
+k=int(argv[3])		
+Build_FT(filename)
+MCS(n,k)
