@@ -10,9 +10,13 @@ Finding a minimal cut set for a fault tree is a NP hard problem. However, we can
 
 ## Usage
 In this code, I used two different structure to represent the fault tree structure and realize its functions:
-1. A tree structure with node   (Fault_tree)
-2. A dictionary storing nodes with their name as the key (Fault_tree_dict)
+* A tree structure with node   (Fault tree)
+*   To test the script, in command line type python "Fault tree.py" "tree.txt" 100000 5
+
+* A dictionary storing nodes with their name as the key (Fault_tree_dict)
+*   To test the script, in command line type python "Fault_tree_dict.py" "tree.txt" 100000 5
 There is also a test case (text.txt) containing a fault tree represented in an xml format.
+
 
 ## Credit
 Thanks Dr.Ennan Zhai for comments.
