@@ -1,7 +1,7 @@
 """
 This script build a real fault tree to store node information in it.
 Each tree node contains node name, value(-1 as default),gate,kid(dictionary,using name as its key)
-To test the script, run the following function
+To test the script mannually, run the following function
 FT_test=FaultTree()
 FT_test.Build_xml('tree.txt')
 FT_test.MonteCarlo_mcs(n,k)
@@ -9,6 +9,7 @@ FT_test.MonteCarlo_mcs(n,k)
 import xml.etree.ElementTree as ET
 from random import choice
 import time
+import sys
 
 class Node(object):
 	def __init__(self,name):
@@ -128,9 +129,11 @@ class FaultTree(object):
 		return set(result)
 				
 	def MonteCarlo_mcs(self,n,k):
-	""" Using Monte Carlo algorith to find minimal cut set
+		""" 
+		Using Monte Carlo algorith to find minimal cut set
 		Run the code n times and print the first k cut set
-	"""
+		"""
+		
 		start_time=time.time()
 		count_list=[]										#if result(root)=1, store the count in count_list
 		cs_all={}											#All cut sets (as list) with count as their key
@@ -171,8 +174,12 @@ class FaultTree(object):
 		print "Running time is", end_time-start_time
 			
 		
-
-# One test case			
-# FT_test=FaultTree()
-# FT_test.Build_xml('tree.txt')
-# FT_test.MonteCarlo_mcs(1000,5)
+argv=sys.argv
+filename=argv[1]
+print argv
+n=int(argv[2])
+k=int(argv[3])
+			
+FT_test=FaultTree()
+FT_test.Build_xml(filename)
+FT_test.MonteCarlo_mcs(n,k)
