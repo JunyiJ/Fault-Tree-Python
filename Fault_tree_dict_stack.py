@@ -147,5 +147,8 @@ filename=argv[1]
 n=int(argv[2])
 k=int(argv[3])		
 Build_FT(filename)
-DFS()
-MCS(n,k)
+if not leaves:
+	print "Your tree is blank"
+else:
+	DFS()
+	MCS(n,k)
