@@ -1,4 +1,4 @@
-# Using dictionary(dict) to realize the fault tree function
+# Using dictionary(dict) to realize the fault tree function and using stack instead of recurrsion to calculate the root value
 # For example dict['Root']=['AND','E1','E2']
 # All leaf nodes' names are stored in a list called leaves, for example ['A1','A2']
 
