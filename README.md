@@ -17,6 +17,9 @@ In this code, I used two different structure to represent the fault tree structu
 * A dictionary storing nodes with their name as the key (Fault_tree_dict)
 
   To test the script, in command line type python "Fault_tree_dict.py" "tree.txt" 100000 5
+  
+  There is also a nonrecurrsion version of the same concept "Fault_tree_dict_stack.py", to test, type:
+  "Fault_tree_dict_stack.py" "tree.txt" 100000 5
 
 There is also a test case (text.txt) containing a fault tree represented in an xml format.
 
