@@ -11,7 +11,7 @@ Finding a minimal cut set for a fault tree is a NP hard problem. However, we can
 ## Usage
 Firstly, a raw input file is provided (for example, input.txt). An xml format file can be generated using parse.py. 
 
-To parse the input into an xml file, in command line type python "parse.py" "input.txt"
+ To parse the input into an xml file, in command line type python "parse.py" "input.txt"
 
 The xml format will be used to form the defult tree
 
