@@ -9,6 +9,12 @@ A **cut set** of the fault tree is a set of leaf values causing the root value e
 Finding a minimal cut set for a fault tree is a NP hard problem. However, we can use Monte Carlo algorithm to find a solution or close solution for the minimal cut set (MCS) problem for a fault tree.
 
 ## Usage
+Firstly, a raw input file is provided (for example, input.txt). An xml format file can be generated using parse.py. 
+
+To parse the input into an xml file, in command line type python "parse.py" "input.txt"
+
+The xml format will be used to form the defult tree
+
 In this code, I used two different structure to represent the fault tree structure and realize its functions:
 * A tree structure with node   (Fault tree)
  
