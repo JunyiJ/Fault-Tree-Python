@@ -30,7 +30,7 @@ def Build_FT(filename):
 			dict[name]=[]
 		for i in range(len(n)):
 			if i==0:
-				if n[i].text=="AND":
+				if n[i].text.upper()=="AND":
 					dict[name].append(1)
 				else:
 					dict[name].append(0)
