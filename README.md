@@ -16,18 +16,16 @@ Firstly, a raw input file with certain formate is provided (for example, input.t
   - The xml format will be used to form the defult tree
 
 In this code, I used two different structure to represent the fault tree structure and realize its functions:
-* A tree structure with node   (Fault tree)
+* A tree structure with node   (Fault_tree.py)
  
-  To test the script, in command line type python "Fault tree.py" "tree.txt" 100000 5
+  To test the script, in command line type python "Fault_tree.py" "xml.txt" 10000 5
 
 * A dictionary storing nodes with their name as the key (Fault_tree_dict)
 
-  To test the script, in command line type python "Fault_tree_dict.py" "tree.txt" 100000 5
-  
-  There is also a nonrecurrsion version:"Fault_tree_dict_stack.py". To test, type:
-  "Fault_tree_dict_stack.py" "tree.txt" 100000 5
+  To test the script, in command line type python "Fault_tree_dict.py" "tree.txt" 10000 5
 
-There is also a test case (text.txt) containing a fault tree represented in an xml format.
+The test cases (input.txt, input1.txt, xml.txt) are in the folder Test_cases. Specially, input.txt and input1.txt are inputs for parse.
+xml.txt is already in xml format and can serve as the input for Fault_tree and Fault_tree_dict.
 
 
 ## Credit
