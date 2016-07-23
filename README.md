@@ -23,7 +23,7 @@ In this project, I used two different structures to represent the fault tree str
 
 * A dictionary storing nodes with their name as the key (Fault_tree_dict)
 
-  To test the script, in command line type python "Fault_tree_dict.py" "tree.txt" 10000 5
+  To test the script, in command line type python "Fault_tree_dict.py" "xml.txt" 10000 5
 
 The test cases (input.txt, input1.txt, xml.txt) are in the folder Test_cases. Specially, input.txt and input1.txt are inputs for parse.
 xml.txt is already in xml format and can serve as the input for Fault_tree and Fault_tree_dict.
