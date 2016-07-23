@@ -1,0 +1,14 @@
+<routing>
+    <src="s1" dst="n1" route="a1, r1"/>
+    <src="s1" dst="n1" route="a1, r3"/>
+    <src="s1" dst="n1" route="a2, r1"/>
+    <src="s1" dst="n1" route="a2, r3"/>
+    <src="s2" dst="n1" route="a2, r1"/>
+    <src="s2" dst="n1" route="a2, r3"/>
+    <src="s2" dst="n1" route="a3, r3"/>
+    <src="s2" dst="n1" route="a3, r2"/>
+    <src="s3" dst="n1" route="a3, r3"/>
+    <src="s3" dst="n1" route="a3, r2"/>
+    <src="s3" dst="n1" route="a4, r3"/>
+    <src="s3" dst="n1" route="a4, r2"/> 
+</routing>
