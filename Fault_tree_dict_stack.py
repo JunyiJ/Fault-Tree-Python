@@ -51,73 +51,32 @@ def MCS(n,k):
 	Run the code n times and print the first k cut set
 	"""
 	start_time = time.time()
-	
 	final = {}					    # Store all result with the count as key. For example final[1]=[[1,0,0],[0,1,1]]
 	seq = []						# Store the count with no duplication
 	for i in range(n):
-		
 		leaf={}						# leaf is the dictionary to store the random value of each leaf
 		count=0
 		for i in leaves:
 			leaf[i] = choice([0,1])
 			count += leaf[i]
-		#result = Cal_FT('Root',leaf)
-		result = Cal_FT2(leaf)
+		result = Cal_FT(leaf)
 		if result:
-			'''Rearrange the node value in a list (cutset) based on the order node in leaves
-			to avoid duplicates. For example {"A1":0,"A2":1,"A3":0} and {"A3":0,"A1":0,"A2":1}
-			should be treated as the same result.
-			'''
 			cutset = []
 			for i in leaves:
-				cutset.append(leaf[i])
-			
-			if count in final:
-				if cutset not in final[count]:
-					final[count].append(cutset)
-			else:
-				seq.append(count)
-				final[count]=[cutset]
-	
-	seq.sort()
-	"""Print the first k cut set based on their count"""
-	#print "order of leaves", leaves
-	i=0
-	while i<k:
-		for j in seq:
-			if i>=k:
-				break
-			for m in final[j]:
-				#print m
-				r=[]
-				for index in range(len(m)):
-					if m[index]:
-						r.append(leaves[index])
-				print r
-				i+=1
-				if i>=k:
-					break
+				cutset.append(str(leaf[i]))
+			cutset="".join(cutset)
+			if cutset not in final:
+				final[cutset]=count
+	final_sorted=sorted(zip(final.values(),final.keys())) 				#Order the cutset by its count
+	for i in range(k):													#Print the first k result
+		cutset=list(final_sorted[i][1])
+		result=[]
+		for index in range(len(cutset)):
+			if cutset[index] is "1":
+				result.append(leaves[index])
+		print result
 	end_time=time.time()
 	print "Running time is", end_time-start_time
-		
-def Cal_FT(node,leaf):
-	"""Using recurssion to calculate the value of the fault tree with assigned value in leaf"""
-	if node in leaf:
-		return leaf[node]
-	method=dict[node][0]
-	if method==1:
-		result=1
-		for subnode in dict[node][1:]:
-			result*=Cal_FT(subnode,leaf)
-			if not result:
-				break
-	else:
-		result=0
-		for subnode in dict[node][1:]:
-			result+= Cal_FT(subnode,leaf)
-			if result>=1:
-				break
-	return result
 
 def DFS():
 	"""
@@ -136,11 +95,9 @@ def DFS():
 				nonleaves.append(sub_node)
 				waitlist.append(sub_node)
 		else:
-			waitlist.pop()
-		
+			waitlist.pop()	
 	
-	
-def Cal_FT2(leaf):
+def Cal_FT(leaf):
 	nonleaves_cp=copy.deepcopy(nonleaves)
 	dict_cp=copy.deepcopy(dict)
 	for i in leaf:
