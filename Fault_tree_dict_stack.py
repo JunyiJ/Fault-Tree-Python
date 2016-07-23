@@ -98,7 +98,7 @@ def DFS():
 			waitlist.pop()	
 	
 def Cal_FT(leaf):
-	'''Using non recursion method to calculate the value in Root node'''
+	"""Using non recursion method to calculate the value in Root node"""
 	nonleaves_cp=copy.deepcopy(nonleaves)
 	dict_cp=copy.deepcopy(dict)
 	for i in leaf:
