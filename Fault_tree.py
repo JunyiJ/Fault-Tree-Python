@@ -42,7 +42,7 @@ class FaultTree(object):
 	def Length(self):
 		return self.size
 		
-	def BFS_search2(self,name):
+	def DFS_search2(self,name):
 		# Using non-recurrsion method, Return a list containing all node that has name as a kid
 		result=[]
 		if not self.root:
@@ -64,7 +64,7 @@ class FaultTree(object):
 		if new_node.name=="Root":
 			self.root=new_node
 		else:
-			to_node=self.BFS_search2(new_node.name)
+			to_node=self.DFS_search2(new_node.name)
 			for n in to_node:
 				n.kid[new_node.name]=new_node
 		self.size += 1
@@ -97,7 +97,7 @@ class FaultTree(object):
 			self._print(self.root)
 		
 	def Cal_FT(self,leaf_value):
-		# Using non stack method to calculate the value of root based on leaf_values
+		# Using non recursive method to calculate the value of root based on leaf_values
 		value=copy.deepcopy(leaf_value)
 		result=None
 		if not self.root:
