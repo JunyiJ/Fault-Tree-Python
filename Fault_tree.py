@@ -30,6 +30,9 @@ class Node(object):
 		self.size+=1
 	def def_gate(self,gate):
 		self.gate=gate
+	def __iter__(self):
+		for k in self.kid:
+			yield k,self.kid[k]
 
 class FaultTree(object):
 	def __init__(self):
@@ -49,14 +52,13 @@ class FaultTree(object):
 		while waitlist:
 			subnode=waitlist.pop()
 			if not subnode.is_leaf():
-				for k in subnode.kid:
+				for k,v in subnode:
 					if k==name:
 						result.append(subnode)
 					else:
-						if not subnode.kid[k].is_leaf():
-							waitlist.append(subnode.kid[k])
-		return result
-		
+						if not v.is_leaf():
+							waitlist.append(v)
+		return result		
 
 	def Add_node(self,new_node):
 		if new_node.name=="Root":
@@ -106,21 +108,21 @@ class FaultTree(object):
 			node=DFS_waitlist.pop()
 			DFS.append(node)
 			if not node.is_leaf():
-				for k in node.kid:
-					DFS_waitlist.append(node.kid[k])
+				for k,v in node:
+					DFS_waitlist.append(v)
 		while DFS:
 			node=DFS.pop()
 			if not node.is_leaf():
 				method=node.gate
 				if method.upper()=="AND":
 					result=1
-					for k in node.kid:
+					for k,v in node:
 						result*=value[k]
 						if not result:
 							break
 				else:
 					result=0
-					for k in node.kid:
+					for k,v in node:
 						result+=value[k]
 						if result:
 							break
@@ -136,8 +138,8 @@ class FaultTree(object):
 		while waitlist:
 			subnode=waitlist.pop()
 			if not subnode.is_leaf():
-				for k in subnode.kid:
-					waitlist.append(subnode.kid[k])
+				for k,v in subnode:
+					waitlist.append(v)
 			else:
 				result.append(subnode.name)
 		#print set(result)
