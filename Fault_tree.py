@@ -178,8 +178,7 @@ class FaultTree(object):
 			print result
 		end_time=time.time()
 		print "Running time is", end_time-start_time
-			
-		
+
 argv=sys.argv
 filename=argv[1]
 #print argv
