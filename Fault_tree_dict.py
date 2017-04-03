@@ -9,11 +9,12 @@
 					
 import xml.etree.ElementTree as ET
 from random import choice
-import time
 import sys
 import copy
+import time
 
 dict = {}								# The dictionary to store all tree node information
+dict_all={}
 leaves = []								# The list to store the names of leaf node
 nonleaves = []
 def Build_FT(filename):
@@ -26,6 +27,7 @@ def Build_FT(filename):
 	for n in root:
 		name=n.attrib['id']
 		#nonleaves.append(name)
+		
 		if name not in dict:
 			dict[name]=[]
 		for i in range(len(n)):
@@ -35,22 +37,22 @@ def Build_FT(filename):
 				else:
 					dict[name].append(0)
 			else:
-				dict[name].append(n[i].text)
-				if i>=1:
-					if n[i].text not in dict:	# Also create entry for kid node
-						
-						dict[n[i].text]=[]
+				dict[name].append(n[i].text)				
+				if n[i].text not in dict:	# Also create entry for kid nodes						
+					dict[n[i].text]=[]
 					
 	"""Test whether a node is leaf node, if yes add it to list leaves"""
 	for i in dict:
+		dict_all[i]=-1
 		if not dict[i]:
 			leaves.append(i)
-
 def MCS(n,k):
 	"""Using Monte Carlo algorith to find minimal cut set
 	Run the code n times and print the first k cut set
 	"""
-	start_time = time.time()
+	global dict_all
+	dict_val=copy.deepcopy(dict_all)
+	#start_time = time.time()
 	final = {}					    # Store all result with the count as key. For example final[1]=[[1,0,0],[0,1,1]]
 	seq = []						# Store the count with no duplication
 	for i in range(n):
@@ -58,8 +60,10 @@ def MCS(n,k):
 		count=0
 		for i in leaves:
 			leaf[i] = choice([0,1])
+			dict_val[i]=leaf[i]
 			count += leaf[i]
-		result = Cal_FT(leaf)
+		result = Cal_FT(dict_val)	
+		
 		if result:
 			cutset = []
 			for i in leaves:
@@ -75,14 +79,16 @@ def MCS(n,k):
 			if cutset[index] is "1":
 				result.append(leaves[index])
 		print result
-	end_time=time.time()
-	print "Running time is", end_time-start_time
+	#end_time=time.time()
+	#print "Running time is", end_time-start_time
+	
 
 def DFS():
 	"""
 	Using depth first search to find out all non-leaf nodes
 	Cal_FT2 will use this node list to calculate the root value without recurrion
 	"""
+
 	global nonleaves
 	dict_cp=copy.deepcopy(dict)
 	nonleaves=["Root"]
@@ -91,39 +97,43 @@ def DFS():
 		peek=waitlist[-1]
 		if len(dict_cp[peek])>=2:
 			sub_node=dict_cp[peek].pop()
-			if sub_node not in leaves:
+			if dict[sub_node]:
 				nonleaves.append(sub_node)
 				waitlist.append(sub_node)
 		else:
 			waitlist.pop()	
 	
-def Cal_FT(leaf):
+def Cal_FT(dict_val):
+	
+	global dict
+	
 	"""Using non recursion method to calculate the value in Root node"""
+	
 	nonleaves_cp=copy.deepcopy(nonleaves)
-	dict_cp=copy.deepcopy(dict)
-	for i in leaf:
-		dict_cp[i]=leaf[i]
+	
+
+	
 	while nonleaves_cp:
 		cur_node=nonleaves_cp.pop()
-		if isinstance(dict_cp[cur_node],list):
-			if dict_cp[cur_node][0]:
-				result = dict_cp[cur_node][0]
-				for i in dict_cp[cur_node][1:]:
-					result*=dict_cp[i]
+		if dict_val[cur_node]==-1:
+			result = dict[cur_node][0]
+			if dict[cur_node][0]:				
+				for i in dict[cur_node][1:]:
+					result*=dict_val[i]
 					if not result:
 						break
 			else:
-				result = dict_cp[cur_node][0]
-				for i in dict_cp[cur_node][1:]:
-					result+=dict_cp[i]
+				for i in dict[cur_node][1:]:
+					result+=dict_val[i]
 					if result:
 						break
-			dict_cp[cur_node]=result
-	return dict_cp["Root"]			
+			dict_val[cur_node]=result		
+
+	return dict_val["Root"]			
 			
 				
 
-				
+starttime=time.time()				
 argv=sys.argv
 filename=argv[1]
 n=int(argv[2])
@@ -131,3 +141,8 @@ k=int(argv[3])
 Build_FT(filename)
 DFS()
 MCS(n,k)
+endtime=time.time()
+timetxt="Script: Fault_tree_dict. Running time for %s is %s seconds\n"%(filename,endtime-starttime)
+with open("running_time.txt","a") as f:
+		f.write(timetxt)
+print(timetxt)

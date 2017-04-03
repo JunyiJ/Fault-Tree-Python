@@ -1,0 +1,4 @@
+Script: Fault_tree. Running time for .\tasks\topo-3456_out.txt is 2565.65700006 seconds
+Script: Fault_tree. Running time for .\Test_cases\xml.txt is 0.0320000648499 seconds
+Script: Fault_tree_dict. Running time for .\Test_cases\xml.txt is 0.0469999313354 seconds
+Script: Fault_tree_dict. Running time for .\tasks\topo-3456_out.txt is 536.848999977 seconds

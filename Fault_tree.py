@@ -150,7 +150,7 @@ class FaultTree(object):
 		Using Monte Carlo algorith to find minimal cut set
 		Run the code n times and print the first k cut set
 		"""		
-		start_time=time.time()
+		#start_time=time.time()
 		count_list=[]										#if result(root)=1, store the count in count_list
 		cs_all={}											#All cut sets (as list) with count as their key
 		leaf_seq=list(self.Leaf())							#The list that contains all leaf node in a certain order
@@ -161,6 +161,7 @@ class FaultTree(object):
 				leaf_value[j]=choice([0,1])
 				count += leaf_value[j]
 			result = self.Cal_FT(leaf_value)	
+			'''
 			if result:										#If is a cut set, add to cs_all
 				cutset=[]
 				for L in leaf_seq:
@@ -168,6 +169,7 @@ class FaultTree(object):
 				cutset="".join(cutset)
 				if cutset not in cs_all:
 					cs_all[cutset]=count
+		
 		cs_all_sorted=sorted(zip(cs_all.values(),cs_all.keys())) #Order the cutset by its count
 		for i in range(k):
 			cutset=list(cs_all_sorted[i][1])
@@ -176,9 +178,10 @@ class FaultTree(object):
 				if cutset[index] is "1":
 					result.append(leaf_seq[index])
 			print result
-		end_time=time.time()
-		print "Running time is", end_time-start_time
-
+		#end_time=time.time()
+		#print "Running time is", end_time-start_time
+		'''
+starttime=time.time()	
 argv=sys.argv
 filename=argv[1]
 #print argv
@@ -188,3 +191,8 @@ k=int(argv[3])
 FT_test=FaultTree()
 FT_test.Build_xml(filename)
 FT_test.MonteCarlo_mcs(n,k)
+endtime=time.time()
+timetxt="Script: Fault_tree. Running time for %s is %s seconds\n"%(filename,endtime-starttime)
+with open("running_time.txt","a") as f:
+		f.write(timetxt)
+print timetxt

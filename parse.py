@@ -1,6 +1,6 @@
 from xml.etree.ElementTree import Element, SubElement, tostring, ElementTree
 import sys
-
+import time
 # Given an input file, parse it into a xml file, named as the inputfilename_out.txt
 # To test the script, type the following command:
 # python .\parse.py 'input.txt'
@@ -60,8 +60,13 @@ def Add_Node(parentnode,name,gate,child_node):
 	for c in child_node:
 		child=SubElement(new_node,'dep')
 		child.text=c
-		
+starttime=time.time()		
 argv=sys.argv
 infilename=argv[1]
 Parse2xml(infilename)
-	
+endtime=time.time()
+timetxt="Parsing time for %s is %s seconds\n"%(infilename,endtime-starttime)
+with open("parse_time.txt","a") as f:
+		f.write(timetxt)
+
+print timetxt	

@@ -1,0 +1,2 @@
+Parsing time for .\tasks\topo-3456.cnf is 3.6210000515 seconds
+Parsing time for .\tasks\topo-27648.cnf is 180.02699995 seconds
